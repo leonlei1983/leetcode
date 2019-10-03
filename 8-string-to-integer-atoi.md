@@ -50,3 +50,26 @@ Output: -2147483648
 Explanation: The number "-91283472332" is out of the range of a 32-bit signed integer.
              Thefore INT_MIN (-2<sup>31</sup>) is returned.
 </code></pre>
+
+---
+```
+class Solution(object):
+    def myAtoi(self, str):
+        """
+        :type str: str
+        :rtype: int
+        """
+        import re
+        
+        matcher = re.match('^(?:\s*)([\-\+]?\d+)', str)
+        if not matcher:
+            return 0
+        
+        ret = int(matcher.group())
+        max_no = 2**31
+        if ret > (max_no - 1):
+            return max_no - 1
+        if ret < - max_no:
+            return - max_no
+        return ret
+```
